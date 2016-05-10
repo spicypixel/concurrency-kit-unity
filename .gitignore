@@ -1,0 +1,11 @@
+.DS_Store
+*.pidb
+*.userprefs
+*.suo
+Library
+Temp
+*.sln
+*.csproj
+Assets/Spicy Pixel/Assemblies
+Assets/Tests/*.dll
+Assets/Tests/*.dll.meta

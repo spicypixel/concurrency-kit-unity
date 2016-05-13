@@ -15,7 +15,7 @@
     "gulpfile.js",
     "README.md",
     "LICENSE.md",
-    "Source"
+    "Assets/SpicyPixel/ConcurrencyKit"
   ],
   "author": "Spicy Pixel, Inc.",
   "license": "MIT",

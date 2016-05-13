@@ -1,6 +1,7 @@
-cache:
-  paths:
-    - node_modules/
+# Can't cache because npm won't update git repos
+# cache:
+#   paths:
+#     - node_modules/
 
 build:
   script:

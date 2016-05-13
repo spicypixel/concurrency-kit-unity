@@ -10,4 +10,4 @@ Assets/Spicy Pixel/Assemblies
 Assets/Tests/*.dll
 Assets/Tests/*.dll.meta
 node_modules
-Assets/SpicyPixel/ConcurrencyKit/Bin
+Assets/SpicyPixel/Modules/ConcurrencyKit/Bin

@@ -21,7 +21,7 @@ function copyDependenciesToAssets() {
   var assetsDir = path.join(__dirname, "Assets");
   var nodeModuleDir = path.join(__dirname, "node_modules", "spicypixel-concurrency-kit-cs");
   var baseSrcDir = path.join(nodeModuleDir, "Source");  
-  var binDestDir = path.join(assetsDir, "SpicyPixel", "ConcurrencyKit", "Bin");
+  var binDestDir = path.join(assetsDir, "SpicyPixel", "Modules", "ConcurrencyKit", "Bin");
   var testDestDir = binDestDir;
   
   var binAssemblies = [
@@ -79,7 +79,7 @@ function installToUnity() {
     
     gutil.log ("Proceeding with asset install");
 
-    var srcDir = path.join(__dirname, "Assets", "SpicyPixel", "ConcurrencyKit");
+    var srcDir = path.join(__dirname, "Assets", "SpicyPixel", "Modules", "ConcurrencyKit");
     var destDir = path.join(assetsDir, "SpicyPixel", "Modules", "ConcurrencyKit");
         
     return new Promise((resolve, reject) => {

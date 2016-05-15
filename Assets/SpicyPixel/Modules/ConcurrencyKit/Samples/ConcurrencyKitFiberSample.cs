@@ -23,7 +23,8 @@ namespace SpicyPixel.Threading
 
             Fiber.WhenAll (new Fiber[] {
                 RunWithConcurrentBehaviourScheduler (),
-                RunWithSharedScheduler ()
+                RunWithSharedScheduler (),
+                fiberFactory.StartNew(NestedCoroutine())
             }, Timeout.Infinite, CancellationToken.None, fiberScheduler)
 			.ContinueWith ((antecedent) => {
                 Log ("Finished all concurrent tasks.");
@@ -38,11 +39,11 @@ namespace SpicyPixel.Threading
             return fiberFactory.StartNew (() => {
                 Log ("Starting a new fiber on the main Unity thread ...");
             }) // Uses the concurrent behaviour's scheduler
-            .ContinueWith (WaitCoroutine (), fiberScheduler) // Uses the concurrent behaviour's scheduler
+            .ContinueWith (WaitCoroutine ("RunWithConcurrentBehaviourScheduler"), fiberScheduler) // Uses the concurrent behaviour's scheduler
 			.ContinueWith ((antecedent) => {
                 Log ("Continued with another fiber on the main Unity thread after 2 seconds.");
             }, fiberScheduler) // Uses the concurrent behaviour's scheduler
-            .ContinueWith (WaitCoroutine (), fiberScheduler) // Uses the concurrent behaviour's scheduler
+            .ContinueWith (WaitCoroutine ("RunWithConcurrentBehaviourScheduler"), fiberScheduler) // Uses the concurrent behaviour's scheduler
 			.ContinueWith ((antecedent) => {
                 Log ("Continued with another fiber on the main Unity thread after 2 more seconds.");
             }, fiberScheduler); // Uses the concurrent behaviour's scheduler
@@ -53,24 +54,34 @@ namespace SpicyPixel.Threading
         // The fiber that runs also happens to be a coroutine.
         Fiber RunWithSharedScheduler ()
         {
-            return UnityFiberFactory.Default.StartNew (ExampleCoroutine ());
+            return UnityFiberFactory.Default.StartNew (ExampleCoroutine ("RunWithSharedScheduler"));
         }
 
         // This is an example coroutine.
-        IEnumerator ExampleCoroutine ()
+        IEnumerator ExampleCoroutine (string name)
         {
-            Log ("Starting ExampleCoroutine on the main Unity thread.");
+            Log (name + ": Starting ExampleCoroutine on the main Unity thread.");
             yield return new YieldForSeconds (2f);
-            Log ("Finshed ExampleCoroutine in 2s.");
+            Log (name + ": Finshed ExampleCoroutine in 2s.");
         }
 
         // Another coroutine to show running concurrently.
-        IEnumerator WaitCoroutine ()
+        IEnumerator WaitCoroutine (string name)
         {
-            Log ("Waiting 2s on a Fiber of the main Unity thread ...");
+            Log (name + ": Waiting 2s on a Fiber of the main Unity thread ...");
             yield return new YieldForSeconds (2f);
         }
 
+        // Shows how coroutines can be easily nested instead
+        // of using ContinueWith().
+        IEnumerator NestedCoroutine ()
+        {
+            yield return ExampleCoroutine("NestedCoroutine");
+            yield return WaitCoroutine("NestedCoroutine");
+            Log("Both nested Coroutines have completed now.");
+        }
+
+        Vector2 scrollPos;
         void OnGUI ()
         {
             GUI.Label (new Rect (Screen.width / 2 - 200, Screen.height / 2 - 125, 400, 100), 
@@ -79,10 +90,17 @@ namespace SpicyPixel.Threading
                 "The rotating cube shows the main thread continues to execute." +
                 "The sample uses fibers and is suitable for web.");
 
-            GUI.Label (new Rect (Screen.width / 2 - 200, Screen.height / 2 - 25, 400, 200), lastLogMessage);
+            using(var scrollViewScope = new GUI.ScrollViewScope(
+                new Rect (Screen.width / 2 - 200, Screen.height / 2 - 25, 400, 200),
+                scrollPos,
+                new Rect (Screen.width / 2 - 200, Screen.height / 2 - 25, 380, 400)))
+            {
+                scrollPos = scrollViewScope.scrollPosition;
+                GUI.Label (new Rect (Screen.width / 2 - 200, Screen.height / 2 - 25, 380, 400), lastLogMessage);
+            }
 
             if (!running) {
-                var again = GUI.Button (new Rect (Screen.width / 2 - 200, Screen.height / 2 + 175, 100, 40), "Run Again");
+                var again = GUI.Button (new Rect (Screen.width / 2 - 200, Screen.height / 2 + 200, 100, 40), "Run Again");
                 if (again) {
                     lastLogMessage = string.Empty;
                     Start ();

@@ -8,3 +8,4 @@ Temp
 *.csproj
 node_modules
 Assets/SpicyPixel/Modules/ConcurrencyKit/Bin
+obj

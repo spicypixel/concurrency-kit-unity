@@ -1,4 +1,3 @@
-using UnityEditor;
 using UnityEngine;
 using System.Collections;
 using SpicyPixel.Threading.Tasks;

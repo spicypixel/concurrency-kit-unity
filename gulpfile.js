@@ -22,7 +22,8 @@ function copyDependenciesToAssets() {
   var nodeModuleDir = path.join(__dirname, "node_modules", "spicypixel-concurrency-kit-cs");
   var baseSrcDir = path.join(nodeModuleDir, "Source");  
   var binDestDir = path.join(assetsDir, "SpicyPixel", "Modules", "ConcurrencyKit", "Bin");
-  var testDestDir = binDestDir;
+  var testDestDir = path.join(assetsDir, "SpicyPixel", "Modules", "ConcurrencyKit", "Bin");
+  var editorTestDestDir = path.join(assetsDir, "SpicyPixel", "Modules", "ConcurrencyKit", "Bin", "Editor");
   
   var binAssemblies = [
     "System.Threading", 
@@ -30,6 +31,9 @@ function copyDependenciesToAssets() {
     "SpicyPixel.Threading.Unity"];
 
   var testAssemblies = [
+  ];
+    
+  var editorTestAssemblies = [
     "SpicyPixel.Threading.Test",
     "SpicyPixel.Threading.Unity.Test"];
   
@@ -57,6 +61,20 @@ function copyDependenciesToAssets() {
         gulp
           .src(path.join(srcDir, assembly + ".dll"), {base: srcDir})
           .pipe(gulp.dest(testDestDir))
+          .on("end", resolve)
+          .on("error", reject);
+      })
+    );
+  });
+  
+  editorTestAssemblies.forEach(assembly => {
+    promises.concat(
+      new Promise((resolve, reject) => {
+        var srcDir = path.join(baseSrcDir, assembly, "bin", "Release");
+        
+        gulp
+          .src(path.join(srcDir, assembly + ".dll"), {base: srcDir})
+          .pipe(gulp.dest(editorTestDestDir))
           .on("end", resolve)
           .on("error", reject);
       })

@@ -19,7 +19,10 @@ gulp.task("install", () => copyDependenciesToAssets()
 
 function copyDependenciesToAssets() {
   var assetsDir = path.join(__dirname, "Assets");
-  var nodeModuleDir = path.join(__dirname, "node_modules", "spicypixel-concurrency-kit-cs");
+  
+  var nodeModuleDir = require.resolve("spicypixel-concurrency-kit-cs")
+    .match(/.*\/node_modules\/[^/]+\//)[0];
+ 
   var baseSrcDir = path.join(nodeModuleDir, "Source");  
   var binDestDir = path.join(assetsDir, "SpicyPixel", "Modules", "ConcurrencyKit", "Bin");
   var testDestDir = path.join(assetsDir, "SpicyPixel", "Modules", "ConcurrencyKit", "Bin");

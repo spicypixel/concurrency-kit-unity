@@ -7,5 +7,10 @@ Temp
 *.sln
 *.csproj
 node_modules
-Assets/SpicyPixel/Modules/ConcurrencyKit/Bin
 obj
+Artifacts
+Assets/SpicyPixel/Modules/ConcurrencyKit/Bin
+Assets/SpicyPixel/Modules/ConcurrencyKit/Docs
+Assets/SpicyPixel/Modules/ConcurrencyKit/MonoDoc
+Assets/SpicyPixel/Modules/ConcurrencyKit/LICENSE.md
+Assets/SpicyPixel/Modules/ConcurrencyKit/README.md

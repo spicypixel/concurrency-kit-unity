@@ -21,6 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "del": "^2.2.0",
+    "git-rev": "^0.2.1",
     "gulp": "^3.9.1",
     "gulp-flatten": "^0.2.0",
     "gulp-msbuild": "^0.3.2",

@@ -8,6 +8,7 @@ var path = require("path");
 var pathExists = require("path-exists");
 var mkdirp = require('mkdirp');
 var flatten = require("gulp-flatten");
+var gitRev = require('git-rev')
 
 // Default task to run continuous integration
 gulp.task("default", ["ci"]);
@@ -164,16 +165,21 @@ function buildUnityPackage() {
       return new Promise((resolve, reject) => reject());
     }
     mkdirp.sync("Artifacts");
-    return spawnAsync(getUnityPath(), [
-      "-batchmode",
-      "-nographics",
-      "-quit",
-      "-projectPath",
-      __dirname,
-      "-exportPackage",
-      "Assets/SpicyPixel/Modules/ConcurrencyKit",
-      "Artifacts/SpicyPixel.ConcurrencyKit.unitypackage"
-      ]);
+    
+    return new Promise((resolve, reject) => {
+      gitRev.tag((tag) => {
+        resolve(spawnAsync(getUnityPath(), [
+          "-batchmode",
+          "-nographics",
+          "-quit",
+          "-projectPath",
+          __dirname,
+          "-exportPackage",
+          "Assets/SpicyPixel/Modules/ConcurrencyKit",
+          "Artifacts/SpicyPixel.ConcurrencyKit-" + tag + ".unitypackage"
+          ]));
+      });      
+    });
   });
 }
 

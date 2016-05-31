@@ -5,5 +5,7 @@
 
 build:
   script:
+    - npm prune
+    - npm update
     - npm install
     - node node_modules/.bin/gulp ci

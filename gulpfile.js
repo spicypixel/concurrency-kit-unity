@@ -176,7 +176,7 @@ function buildUnityPackage() {
           __dirname,
           "-exportPackage",
           "Assets/SpicyPixel/Modules/ConcurrencyKit",
-          "Artifacts/SpicyPixel.ConcurrencyKit-" + tag + ".unitypackage"
+          "./Artifacts/SpicyPixel.ConcurrencyKit-" + tag + ".unitypackage"
           ]));
       });      
     });

@@ -9,6 +9,7 @@ var pathExists = require("path-exists");
 var mkdirp = require('mkdirp');
 var flatten = require("gulp-flatten");
 var gitRev = require('git-rev')
+var UnityKit = require('@spicypixel-private/unity-kit-js');
 
 // Default task to run continuous integration
 gulp.task("default", ["ci"]);
@@ -28,6 +29,7 @@ gulp.task("package", () =>
   .then(() => buildUnityPackage())
 ));
 
+var unityProject = new UnityKit.UnityProject(__dirname);
 var assetsDir = path.join(__dirname, "Assets");
 var kitDir = path.join(assetsDir, "SpicyPixel", "Modules", "ConcurrencyKit");
 
@@ -168,16 +170,8 @@ function buildUnityPackage() {
     
     return new Promise((resolve, reject) => {
       gitRev.tag((tag) => {
-        resolve(spawnAsync(getUnityPath(), [
-          "-batchmode",
-          "-nographics",
-          "-quit",
-          "-projectPath",
-          __dirname,
-          "-exportPackage",
-          "Assets/SpicyPixel/Modules/ConcurrencyKit",
-          "./Artifacts/SpicyPixel.ConcurrencyKit-" + tag + ".unitypackage"
-          ]));
+        resolve(unityProject.packageAsync(["Assets/SpicyPixel/Modules/ConcurrencyKit"],
+          "./Artifacts/SpicyPixel.ConcurrencyKit-" + tag + ".unitypackage"));
       });      
     });
   });

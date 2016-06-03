@@ -43,7 +43,7 @@ function cleanDependencies() {
 }
 
 function copyDependenciesToAssets() {  
-  var nodeModuleDir = require.resolve("spicypixel-concurrency-kit-cs")
+  var nodeModuleDir = require.resolve("@spicypixel-private/concurrency-kit-cs")
     .match(/.*\/node_modules\/[^/]+\//)[0];
 
   var docsSrcDir = path.join(nodeModuleDir, "Docs"); 

@@ -1,6 +1,6 @@
 {
   "name": "@spicypixel-private/concurrency-kit-unity",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Spicy Pixel Concurrency Kit Unity",
   "private": false,
   "main": "gulpfile.js",

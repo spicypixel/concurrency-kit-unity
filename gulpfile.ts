@@ -64,7 +64,7 @@ function copyDependenciesToAssets(): Promise<Promise<void>[]> {
     "assemble/SpicyPixel.ConcurrencyKit.tree",
     "assemble/SpicyPixel.ConcurrencyKit.zip",
   ];
-  console.log(nodeModuleDir);
+
   let promises: Promise<void>[] = [];
 
   binAssemblies.forEach(assembly => {

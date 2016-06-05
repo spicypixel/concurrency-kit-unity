@@ -113,8 +113,8 @@ function copyDependenciesToAssets(): Promise<Promise<void>[]> {
 
 async function installAsModule(): Promise<void> {
   // Install as a module into a Unity Assets folder if it exists.
-  // CWD path is relative to a node_modules/<this module> install.
-  const parentAssetsDir = path.join(__dirname, "..", "..", "Assets");
+  // CWD path is relative to a node_modules/<this scope>/<this module> install.
+  const parentAssetsDir = path.join(__dirname, "..", "..", "..", "Assets");
 
   try {
     await CoreKit.FileSystem.Directory.accessAsync(parentAssetsDir,

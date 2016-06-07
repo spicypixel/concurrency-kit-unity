@@ -2,9 +2,9 @@ import * as gulp from "gulp";
 import * as gutil from "gulp-util";
 import * as path from "path";
 
-import * as BuildKit from "@spicypixel-private/build-kit-js";
-import * as CoreKit from "@spicypixel-private/core-kit-js";
-import * as UnityKit from "@spicypixel-private/unity-kit-js";
+import * as BuildKit from "@spicypixel/build-kit-js";
+import * as CoreKit from "@spicypixel/core-kit-js";
+import * as UnityKit from "@spicypixel/unity-kit-js";
 import Promise = CoreKit.Promise;
 
 // Default task to run continuous integration
@@ -40,8 +40,8 @@ async function cleanDependencies(): Promise<void> {
 }
 
 function copyDependenciesToAssets(): Promise<Promise<void>[]> {
-  const nodeModuleDir = require.resolve("@spicypixel-private/concurrency-kit-cs")
-    .match(/.*\/node_modules\/@spicypixel-private\/[^/]+\//)[0];
+  const nodeModuleDir = require.resolve("@spicypixel/concurrency-kit-cs")
+    .match(/.*\/node_modules\/@spicypixel\/[^/]+\//)[0];
 
   const docsSrcDir = path.join(nodeModuleDir, "Docs");
   const sourceSrcDir = path.join(nodeModuleDir, "Source");

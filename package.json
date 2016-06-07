@@ -1,14 +1,10 @@
 {
-  "name": "@spicypixel-private/concurrency-kit-unity",
+  "name": "@spicypixel/concurrency-kit-unity",
   "version": "1.1.2",
   "description": "Spicy Pixel Concurrency Kit Unity",
-  "private": false,
   "main": "gulpfile.js",
   "scripts": {
     "postinstall": "gulp install"
-  },
-  "publishConfig": {
-    "registry": "http://npm.private:4873"
   },
   "repository": {
     "type": "git",
@@ -28,10 +24,10 @@
   "author": "Spicy Pixel, Inc.",
   "license": "MIT",
   "dependencies": {
-    "@spicypixel-private/build-kit-js": ">=0.0.23",
-    "@spicypixel-private/concurrency-kit-cs": ">=1.1.4",
-    "@spicypixel-private/core-kit-js": ">=0.0.33",
-    "@spicypixel-private/unity-kit-js": ">=0.0.13",
+    "@spicypixel/build-kit-js": ">=0.0.23",
+    "@spicypixel/concurrency-kit-cs": ">=1.1.4",
+    "@spicypixel/core-kit-js": ">=0.0.33",
+    "@spicypixel/unity-kit-js": ">=0.0.13",
     "gulp": "^3.9.1"
   }
 }

@@ -4,6 +4,7 @@
   "description": "Spicy Pixel Concurrency Kit Unity",
   "main": "gulpfile.js",
   "scripts": {
+    "prepublish": "gulp package",
     "postinstall": "gulp install"
   },
   "repository": {

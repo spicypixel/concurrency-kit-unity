@@ -1,11 +1,10 @@
-# Can't cache because npm won't update git repos
-# cache:
-#   paths:
-#     - node_modules/
+cache:
+  paths:
+    - node_modules/
 
 build:
   script:
     - npm prune
     - npm update
     - npm install
-    - node node_modules/.bin/gulp ci
+    - node node_modules/.bin/gulp package

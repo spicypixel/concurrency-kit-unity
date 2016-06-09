@@ -7,11 +7,10 @@ import * as CoreKit from "@spicypixel/core-kit-js";
 import * as UnityKit from "@spicypixel/unity-kit-js";
 import Promise = CoreKit.Promise;
 
-// Default task to run continuous integration
-gulp.task("default", ["ci"]);
+const moduleName: string = "ConcurrencyKit";
 
-// Continuous integration
-gulp.task("ci", ["package"]);
+// Default task to run continuous integration
+gulp.task("default", ["package"]);
 
 // Install
 gulp.task("install", () =>
@@ -26,7 +25,7 @@ gulp.task("package", () =>
 
 const unityProject = new UnityKit.UnityProject(__dirname);
 const assetsDir = path.join(__dirname, "Assets");
-const kitDir = path.join(assetsDir, "SpicyPixel", "Modules", "ConcurrencyKit");
+const kitDir = path.join(assetsDir, "SpicyPixel", "Modules", moduleName);
 
 async function cleanDependencies(): Promise<void> {
   gutil.log(gutil.colors.cyan("Cleaning ..."));
@@ -35,7 +34,7 @@ async function cleanDependencies(): Promise<void> {
   await CoreKit.FileSystem.removePatternsAsync([
     "Bin",
     "Docs",
-    "MonoDoc/SpicyPixel.ConcurrencyKit.*"
+    "MonoDoc/SpicyPixel." + moduleName + ".*"
   ], { globOptions: { cwd: kitDir } });
 }
 
@@ -60,9 +59,9 @@ function copyDependenciesToAssets(): Promise<Promise<void>[]> {
     "SpicyPixel.Threading.Unity.Test"];
 
   const monoDocs = [
-    "SpicyPixel.ConcurrencyKit.source",
-    "assemble/SpicyPixel.ConcurrencyKit.tree",
-    "assemble/SpicyPixel.ConcurrencyKit.zip",
+    "SpicyPixel." + moduleName + ".source",
+    "assemble/SpicyPixel." + moduleName + ".tree",
+    "assemble/SpicyPixel." + moduleName + ".zip",
   ];
 
   let promises: Promise<void>[] = [];
@@ -127,8 +126,8 @@ async function installAsModule(): Promise<void> {
 
   gutil.log("Proceeding with asset install");
 
-  const srcDir = path.join(__dirname, "Assets", "SpicyPixel", "Modules", "ConcurrencyKit");
-  const destDir = path.join(parentAssetsDir, "SpicyPixel", "Modules", "ConcurrencyKit");
+  const srcDir = path.join(__dirname, "Assets", "SpicyPixel", "Modules", moduleName);
+  const destDir = path.join(parentAssetsDir, "SpicyPixel", "Modules", moduleName);
 
   await CoreKit.FileSystem.copyPatternsAsync(
     [path.join(srcDir, "**/*"), "!**/*.meta"],
@@ -149,6 +148,6 @@ async function buildUnityPackage(): Promise<void> {
 
   await CoreKit.FileSystem.Directory.createRecursiveAsync("Artifacts");
   const tag = await BuildKit.GitRevision.tagAsync();
-  await unityProject.packageAsync(["Assets/SpicyPixel/Modules/ConcurrencyKit"],
-    "./Artifacts/SpicyPixel.ConcurrencyKit-" + tag + ".unitypackage");
+  await unityProject.packageAsync(["Assets/SpicyPixel/Modules/" + moduleName],
+    "./Artifacts/SpicyPixel." + moduleName + "-" + tag + ".unitypackage");
 }

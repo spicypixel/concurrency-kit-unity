@@ -25,10 +25,10 @@
   "author": "Spicy Pixel, Inc.",
   "license": "MIT",
   "dependencies": {
-    "@spicypixel/build-kit-js": ">=0.0.23",
-    "@spicypixel/concurrency-kit-cs": ">=1.1.4",
-    "@spicypixel/core-kit-js": ">=0.0.33",
-    "@spicypixel/unity-kit-js": ">=0.0.13",
+    "@spicypixel/build-kit-js": "*",
+    "@spicypixel/concurrency-kit-cs": "*",
+    "@spicypixel/core-kit-js": "*",
+    "@spicypixel/unity-kit-js": "*",
     "gulp": "^3.9.1"
   }
 }

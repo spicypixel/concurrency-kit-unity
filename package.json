@@ -4,7 +4,7 @@
   "description": "Spicy Pixel Concurrency Kit Unity",
   "main": "gulpfile.js",
   "scripts": {
-    "prepublish": "gulp package",
+    "prepublishOnly": "gulp package",
     "postinstall": "gulp install"
   },
   "repository": {
@@ -12,23 +12,20 @@
     "url": "https://github.com/spicypixel/concurrency-kit-unity.git"
   },
   "files": [
-    "README.md",
-    "LICENSE.md",
     "Assets/SpicyPixel/Modules/ConcurrencyKit/Samples",
     "Assets/SpicyPixel/Modules/ConcurrencyKit/Test",
-    "typings",
+    "Assets/SpicyPixel/Modules/ConcurrencyKit.meta",
+    "Assets/SpicyPixel/Modules/ConcurrencyKit/**/*.meta",
     "gulpfile.js",
-    "gulpfile.ts",
-    "tsconfig.json",
-    "typings.json"
+    "gulpfile.ts"
   ],
   "author": "Spicy Pixel, Inc.",
   "license": "MIT",
   "dependencies": {
-    "@spicypixel/build-kit-js": "*",
-    "@spicypixel/concurrency-kit-cs": "*",
-    "@spicypixel/core-kit-js": "*",
-    "@spicypixel/unity-kit-js": "*",
+    "@spicypixel/build-kit-js": "^0.0.65",
+    "@spicypixel/concurrency-kit-cs": "^1.1.16",
+    "@spicypixel/core-kit-js": "^0.0.57",
+    "@spicypixel/unity-kit-js": "^0.0.60",
     "gulp": "^3.9.1"
   }
 }

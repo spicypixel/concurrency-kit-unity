@@ -2,15 +2,32 @@
 *.pidb
 *.userprefs
 *.suo
-Library
-Temp
 *.sln
 *.csproj
-node_modules
-obj
-Artifacts
-Assets/SpicyPixel/Modules/ConcurrencyKit/Bin
-Assets/SpicyPixel/Modules/ConcurrencyKit/Docs
-Assets/SpicyPixel/Modules/ConcurrencyKit/MonoDoc
+npm-debug.log
+Library/
+Temp/
+node_modules/
+obj/
+Artifacts/
+
+# Ignore submodules because content and meta
+# will be imported
+#
+
+# Keep *.meta consistent for packaging and
+# project refs but don't check in the binaries.
+# ---
+Assets/SpicyPixel/Modules/ConcurrencyKit/Docs/**/*
+!Assets/SpicyPixel/Modules/ConcurrencyKit/Docs/**/
+Assets/SpicyPixel/Modules/ConcurrencyKit/Lib/**/*
+!Assets/SpicyPixel/Modules/ConcurrencyKit/Lib/**/
+Assets/SpicyPixel/Modules/ConcurrencyKit/Editor/**/*
+!Assets/SpicyPixel/Modules/ConcurrencyKit/Editor/**/
+Assets/SpicyPixel/Modules/ConcurrencyKit/MonoDoc/**/*
+!Assets/SpicyPixel/Modules/ConcurrencyKit/MonoDoc/**/
+Assets/SpicyPixel/Modules/ConcurrencyKit/Scripts/**/*
+!Assets/SpicyPixel/Modules/ConcurrencyKit/Scripts/**/
 Assets/SpicyPixel/Modules/ConcurrencyKit/LICENSE.md
 Assets/SpicyPixel/Modules/ConcurrencyKit/README.md
+!Assets/SpicyPixel/Modules/ConcurrencyKit/**/*.meta
